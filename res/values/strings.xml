@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">SlowotokBreaker</string>
+    <string name="app_name">slotok</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="hint">Wpisz litery wierszamy od góry do dołu</string>
 
 </resources>
