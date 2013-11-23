@@ -76,8 +76,8 @@ public class MainActivity extends Activity {
 			//HashSet<Vector<Integer>> combinations = wordGen.getCombinations();
 
 			readAndCheckCombinationsFromFile(BordPointType.CORNER);
-			//readAndCheckCombinationsFromFile(BordPointType.MIDDLE);
-			//readAndCheckCombinationsFromFile(BordPointType.SIDE);
+			readAndCheckCombinationsFromFile(BordPointType.MIDDLE);
+			readAndCheckCombinationsFromFile(BordPointType.SIDE);
 			/*Vector<Vector<Integer>> combinations = readCombinationsFromFile("corner.txt");
 			for (Vector<Integer> combination : combinations) {
 				if (checkIfWordCorrect(combination)) {
@@ -181,10 +181,11 @@ public class MainActivity extends Activity {
 	             	   wordToCheck = new String(wordsFromcombination[j], 0, position);
 	          		   if (/*wordsWithLetters1*/wordsWithLetters.contains(wordToCheck)) {
 	        		 	   if (!goodWords.contains(wordToCheck)) {
-	          			       goodWords.add(wordToCheck);
+	        		 		   final String goodWord = wordToCheck;
 	          			       this.runOnUiThread(new Runnable() {
 	          			    	   @Override
 	          			    	   public void run() {
+	    	          			       goodWords.add(goodWord);
 	    		        		 	   adapter.notifyDataSetChanged();	          			    		   
 	          			    	   }
 	          			       });
@@ -256,6 +257,17 @@ public class MainActivity extends Activity {
 	
 	public void doGeneration(String inputLetters) {
 		letters = inputLetters;
+		goodWords.clear();
+		//goodWords = new ArrayList<String>();
+        //adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+        //		goodWords);
+        //mainView.setListViewAdapter(adapter);
+		this.runOnUiThread(new Runnable() {
+    	   @Override
+	       public void run() {
+    		   adapter.notifyDataSetChanged();	          			    		   
+	       }
+	    });
 		Log.i("slotok", "inputLetters = " + inputLetters);
 		Board.letters = inputLetters.toCharArray();
 		//Filter out words
@@ -301,7 +313,7 @@ public class MainActivity extends Activity {
         }/* else {
         	copyFileFromProjectFilesToSDCard("corner.txt");
         }*/
-        /*
+        
         file = new File(getFilesDir(), "middle.dat");
         if (!file.exists()) {
         	new GenerateCombinationTask().execute(BordPointType.MIDDLE);
@@ -309,7 +321,7 @@ public class MainActivity extends Activity {
         file = new File(getFilesDir(), "side.dat");
         if (!file.exists()) {
         	new GenerateCombinationTask().execute(BordPointType.SIDE);
-        }*/
+        }
     }
     
     private void readWordsFromAssets() {

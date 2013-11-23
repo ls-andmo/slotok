@@ -5,6 +5,7 @@ import android.content.Context;
 import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -44,6 +45,11 @@ public class LetterInputLayout extends LinearLayout{
 					//do something to warn
 					return;
 				}
+				InputMethodManager inputManager = (InputMethodManager)
+                activity.getSystemService(Context.INPUT_METHOD_SERVICE); 
+
+				inputManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(),
+				                                     InputMethodManager.HIDE_NOT_ALWAYS);
 				
 				activity.doGeneration(letters);
 				//find word from table
