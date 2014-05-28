@@ -179,13 +179,14 @@ public class MainActivity extends Activity {
             	   }
             	   for (int j = 0; j < wordsFromcombination.length; j++) {
 	             	   wordToCheck = new String(wordsFromcombination[j], 0, position);
-	          		   if (/*wordsWithLetters1*/wordsWithLetters.contains(wordToCheck)) {
+	          		   if (wordsWithLetters.contains(wordToCheck)) {
 	        		 	   if (!goodWords.contains(wordToCheck)) {
-	        		 		   final String goodWord = wordToCheck;
+	        		 		   //final String goodWord = wordToCheck;
+	        		 		   goodWords.add(wordToCheck);
 	          			       this.runOnUiThread(new Runnable() {
 	          			    	   @Override
 	          			    	   public void run() {
-	    	          			       goodWords.add(goodWord);
+	    	          			       //goodWords.add(goodWord);
 	    		        		 	   adapter.notifyDataSetChanged();	          			    		   
 	          			    	   }
 	          			       });
@@ -329,7 +330,7 @@ public class MainActivity extends Activity {
 		try {
 			stream = getAssets().open("words.txt");
 		    BufferedReader in=
-		        new BufferedReader(new InputStreamReader(stream));
+		        new BufferedReader(new InputStreamReader(stream, Charset.forName("UTF-8")));
 		    String word;
 		
 		    while ((word = in.readLine()) != null) {

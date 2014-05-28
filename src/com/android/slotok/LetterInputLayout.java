@@ -33,7 +33,6 @@ public class LetterInputLayout extends LinearLayout{
 	}
 	
 	private void hookupButton(final MainActivity activity) {
-		final LetterInputLayout layout = this;
 		crackButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				//editText.setText("Generation words started...");
